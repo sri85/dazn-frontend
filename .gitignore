@@ -80,3 +80,8 @@ typings/
 # Serverless directories
 .serverless
 
+# Reports
+
+htmlReports
+jsonReports
+
