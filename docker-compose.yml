@@ -1,0 +1,35 @@
+# Usage:
+#   docker-compose up --force-recreate
+version: '2.1'
+#volumes:
+#  e2e-videos:
+
+services:
+  #--------------#
+  elagalu:
+    image: "elgalu/selenium"
+
+  zalenium:
+    image: "dosel/zalenium:3.10.0c"
+    container_name: zalenium
+    hostname: zalenium
+    privileged: true
+    volumes:
+    - ./e2e-videos:/home/seluser/videos
+    - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+    - 4444:4444
+    command: >
+      start --desiredContainers 3
+            --maxDockerSeleniumContainers 8
+            --screenWidth 1920 --screenHeight 1080
+            --timeZone "Europe/London"
+            --videoRecordingEnabled true
+            --sauceLabsEnabled false
+            --browserStackEnabled false
+            --testingBotEnabled false
+            --startTunnel false
+            --keepOnlyFailedTests false
+            --seleniumImageName "elgalu/selenium"
+            --maxTestSessions 4
+

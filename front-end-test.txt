@@ -1,0 +1,55 @@
+Front End Test
+Introduction about the framework:
+This test uses protractor along with cucumber framework to maintain and author the tests , this allows 3 amigos
+strategy where (Product, QA ,Developer) work together to define the acceptance criteria. Since the front end is written in react
+it makes sense to have the tests written in javascript which means the test code can live next to source code in the same
+repository and also it makes easier for the developers to contribute to the test code as they share the common language
+i.e javascript. The reason I used protractor as it is a full fledged framework covers most of the boiler plate code which makes
+the setup lot easier.
+
+
+Configurations: All the configurations for running the tests are stored in conf.js this controls the report generation , browser
+configuration etc.
+Page Objects: All the page objects are stored under pages which acts like an API for the page under test . So when ever a behavior
+ is added or modified we just change the page object class, this way our tests are more maintainable.
+Reporting and Cucumber Utils: All the cucumber helpers are defined in hooks.js under support folder. Whenever a scenario fails a
+screenshot is captured and attached to the report.
+
+Non Technical part:
+
+2. How will the tests run in the pipeline without the backend.
+There are few ways using which we can run the tests in pipeline
+
+1. First stub out the backend(Weather API) using stub server like Mountebank http://www.mbtest.org/ which allows greater control
+of the backend API ,this means our tests will be faster and more deterministic because we no longer rely on the actual
+service. However there is a risk of these mocks going out of date , For example if the backend service changes the contract
+of the API , our frontend tests will continue to pass but in reality when the code goes live things will fail.
+So in order to overcome this we will use contract testing https://github.com/pact-foundation/pact-js. In this case our front end
+app is a consumer and the weather API is provider.
+The contract test which will first validate that the contract between the front end and the back end API is still in tact . In
+thIf yes that means our contract is still valid and we can continue running our frontend tests. But if our contract test fails
+then we will need to see what has changed update our mock accordingly and then continue with the tests.
+The idea behind using contract test is here is that we do not need actual services to be up and running but a server which
+serves the API that we need , this way we can control the test data , save resources and decrease the build times which is
+a crucial factor when the tests are running on every commit or PR.
+
+2. If contract testing is not feasible i would run the backend service running as a docker container which is
+running alongside front end app . The advantage of this approach is that it is simple to set up and also will validate the system
+in a truly end to end fashion . But the disadvantage of this approach is that the tests maybe slower and also could be non
+deterministic because the front end tests are at the mercy of how fast or slow backend tests are .
+
+
+When we need to run the tests in the pipeline we will need to dockerize the protractor this will keep the CI slaves clean
+and also gives us better control in terms of memory management. And also we will need to run the docker selenium grid which
+will allow us to run browsers without the need to install any binaries on the slaves and also allows better memory management.
+Having selenium grid will also allow us to run tests in parallel which can drastically reduce the test execution time and result
+in faster feedback loop .
+
+
+Observations noted
+
+1. The error message when we enter non existent postcode in the UI we see a message "Unable to find the postcode." but in the test
+ document it says it must to be "Postcode not found!".
+
+2. And for invalid post code like "invalid" in the UI we see a message "Invalid postcode." but the document says it must be
+"Postcode not valid."
