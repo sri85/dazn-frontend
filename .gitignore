@@ -9,6 +9,8 @@ yarn-error.log*
 package-lock.json
 .idea
 _DS_Store
+.DS_Store
+
 node_modules
 
 # Runtime data
