@@ -6,7 +6,7 @@ The tests are written using `cucumberjs` and `protractor`. `Cucumber` allows
 1. [Nodejs](https://nodejs.org/en/)
 2. [Docker](https://www.docker.com/)
 
-##Running the tests
+## Running the tests
 1. Clone the repository.
 2. Navigate to `dazn-frontend` folder
 3. Do `npm install`
