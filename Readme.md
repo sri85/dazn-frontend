@@ -7,12 +7,15 @@ The tests are written using `cucumberjs` and `protractor`. `Cucumber` allows
 2. [Docker](https://www.docker.com/)
 
 ##Running the tests
-1. Navigate to `weather-app-frontend` folder
-2. Do `npm install`
-3. Run `npm run webdriver-update`(This updates all the selenium drivers)
-4. Run `npm run webdriver-start`(This starts the selenium server)
-5. You can confirm whether the selenium server is running this by visiting this [URL](http://localhost:4444/wd/hub/static/resource/hub.html)
-6. Open a new terminal window and run `npm test` which runs all the tests.
+1. Clone the repository.
+2. Navigate to `dazn-frontend` folder
+3. Do `npm install`
+4. Run `npm run webdriver-update`(This updates all the selenium drivers)
+5. Run `npm run webdriver-start`(This starts the selenium server)
+6. You can confirm whether the selenium server is running this by visiting this [URL]
+(http://localhost:4444/wd/hub/static/resource/hub.html)
+7. Open a new terminal window and run `npm test` which runs all the tests.
+
 To shut the selenium server just press ctrl+c in terminal window where the selenium server is running.
 
 ## Reports
