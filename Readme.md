@@ -1,4 +1,4 @@
-#Introduction
+# Introduction
 The tests are written using `cucumberjs` and `protractor`. `Cucumber` allows 
 3 amigos strategy which allows joint collaboration between Product Owner, QA and the developer.
 
